@@ -14,12 +14,12 @@ def main():
     MYPATH = os.getcwd()
     print(MYPATH)
 
-    filenames = os.listdir(MYPATH + '/img')
+    filenames = os.listdir(MYPATH + '/img_orig')
     for file in filenames:
         print(file)
 
         # read-in files
-        img = cv2.imread(MYPATH + '/img/' + file)
+        img = cv2.imread(MYPATH + '/img_orig/' + file)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img = np.asarray(img, dtype=np.uint8)
 
