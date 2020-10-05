@@ -2,10 +2,14 @@ from PIL import Image
 import numpy as np
 import os
 import cv2
-from matplotlib import pyplot as plt
 
 
 def main():
+    """
+    Normalizes an Image and saves it as well as its individual channels
+    (In this case, the channels are RGB)
+    :return: None
+    """
     # Define path:
     MYPATH = os.getcwd()
     print(MYPATH)
@@ -25,11 +29,11 @@ def main():
         new_comp = img
         for i in range(3):
             print(i)
-            new_img = cv2.GaussianBlur(img[:,:, i], (31,31), sigmaX=0)
+            new_img = cv2.GaussianBlur(img[:, :, i], (31, 31), sigmaX=0)
             new_img = normalize(new_img)
 
             # Combine normalized channels to complete image
-            new_comp[:,:, i] = new_img
+            new_comp[:, :, i] = new_img
 
             # save image of each channel
             newIm = Image.fromarray(new_img)
@@ -43,10 +47,16 @@ def main():
 
 
 def normalize(img):
+    """
+        Normalizes an Image to the range of 0-255.
+        :param img: a 2D-array
+        :return: a 2D-array
+        """
     img_min = np.min(img)
     img_max = np.max(img)
     print(img_min, img_max)
     img_new = ((img-img_min) * (1/(img_max - img_min))) ** 2 * 255
     return np.asarray(img_new, dtype=np.uint8)
+
 
 main()
