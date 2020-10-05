@@ -24,7 +24,7 @@ def main():
         # Reshape the array as the original image
         img_segm.shape = img.shape
 
-        cv2.imwrite(os.getcwd() + '/img_kmeans/kmeans_' + file, img_segm)
+        cv2.imwrite(os.getcwd() + f'/img_kmeans/{file[:1]}_kmeans{file[1:]}', img_segm)
 
 
 # function from https://www.idtools.com.au/segmentation-k-means-python/
