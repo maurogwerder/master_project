@@ -37,12 +37,12 @@ def main():
 
             # save image of each channel
             newIm = Image.fromarray(new_img)
-            new_fname = MYPATH + '/' + 'img_norm' + '/' + str(i) + '_norm_' + file
+            new_fname = MYPATH + '/' + 'img_norm' + '/' + str(i + 1) + '_norm_' + file
             newIm.save(new_fname)
 
         # Save complete image
         newIm_comp = Image.fromarray(new_comp)
-        comp_fname = MYPATH + '/img_norm/comp_norm_' + file
+        comp_fname = MYPATH + '/img_norm/0_norm_' + file
         newIm_comp.save(comp_fname)
 
 
