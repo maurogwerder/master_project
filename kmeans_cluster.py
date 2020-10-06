@@ -4,6 +4,7 @@ import cv2
 import os
 from matplotlib import pyplot as plt
 import numpy.ma as ma
+from PIL import Image
 
 
 def main():
@@ -28,12 +29,16 @@ def main():
         # We sort the values: the cochlea is falling in the second darkest category, so we take the second value
         values.sort()
         print(values)
-        mask = np.where((img_segm >= values[6]), True, False)
+        mask = np.where((img_segm >= values[5]), True, False)
         masked_img = ma.masked_array(img_segm, mask)
-        plt.imshow(masked_img)
-        plt.show()
-
-        cv2.imwrite(os.getcwd() + f'/img_kmeans/{file[:1]}_kmeans_masked_{file[1:]}', masked_img)
+        #plt.imshow(masked_img)
+        #plt.show()
+        cv2.imwrite(os.getcwd() + f'/img_kmeans/unmasked/{file[:1]}_kmeans_{file[1:]}', img_segm)
+        cv2.imwrite(os.getcwd() + f'/img_kmeans/masked/{file[:1]}_kmeans_masked_{file[1:]}', masked_img)
+        maskIm = Image.fromarray(mask)
+        mask_fname = os.getcwd() + f'/img_kmeans/masks/{file[:1]}_mask_{file[1:]}'
+        maskIm.save(mask_fname)
+        #cv2.imwrite(os.getcwd() + f'/img_kmeans/masks/{file[:1]}_mask_{file[1:]}', mask)
 
 
 # function from https://www.idtools.com.au/segmentation-k-means-python/
